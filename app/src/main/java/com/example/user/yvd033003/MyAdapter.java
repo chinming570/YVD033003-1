@@ -47,6 +47,8 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convretView, ViewGroup parent) {
         Log.d("MyView", "p:" + position);
+        Log.d("MyView", "CHKS, 0:" + chks[0]);
+
         ViewHolder holder = new ViewHolder();
         if (convretView == null)
         {
@@ -60,6 +62,15 @@ public class MyAdapter extends BaseAdapter {
         {
             holder = (ViewHolder) convretView.getTag();
         }
+
+        holder.chk.setOnCheckedChangeListener(null);
+        holder.chk.setChecked(chks[position]);
+        holder.chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                                  @Override
+                                                  public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                      chks[position] = isChecked;
+                                                  }
+                                              });
         holder.tv.setText(data.get(position));
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
